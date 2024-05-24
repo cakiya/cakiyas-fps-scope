@@ -23,7 +23,7 @@ class FpsScope{
     }
 }
 
-ExitFunc(){
+ExitFunc(ExitReason, ExitCode){
     FpsScope.delete()
 }
 
