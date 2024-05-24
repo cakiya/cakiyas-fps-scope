@@ -33,6 +33,14 @@ promptObj := InputBox("Type in the name of a window.", "FPS scope")
 windowName := promptObj.Value ; can use promptObj.Result to test for cancel and shit
 FpsScope.new(windowName)
 
+if (promptObj.Result = "OK") {
+    ; to add: checks
+} else if (promptObj.Result = "Cancel") {
+    ExitApp
+}
+
+
+
 ; ============ HOTKEYS ============
 `::{ ; `                        to scope
     FpsScope.show()
