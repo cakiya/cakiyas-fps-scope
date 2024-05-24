@@ -1,6 +1,5 @@
 ﻿#Requires AutoHotkey v2.0
-
-Persistent  ; Prevent the script from exiting automatically.
+Persistent
 OnExit ExitFunc
 
 class FpsScope{
@@ -24,13 +23,13 @@ class FpsScope{
     }
 }
 
-ExitFunc(ExitReason, ExitCode){
+ExitFunc(){
     FpsScope.delete()
 }
 
 ; ============= MAIN ==============
 promptObj := InputBox("Type in the name of a window.", "FPS scope")
-windowName := promptObj.Value ; can use promptObj.Result to test for cancel and shit
+windowName := promptObj.Value
 FpsScope.new(windowName)
 
 if (promptObj.Result = "OK") {
@@ -42,11 +41,11 @@ if (promptObj.Result = "OK") {
 
 
 ; ============ HOTKEYS ============
-`::{ ; `                        to scope
+`::{ ;                  to scope:   `
     FpsScope.show()
     KeyWait "``"
     FpsScope.hide()
 }
-^+!x:: { ; Ctrl Shift Alt X     to quit
+^+!x:: { ;              to quit:    Ctrl Shift Alt X
     ExitApp
 }
