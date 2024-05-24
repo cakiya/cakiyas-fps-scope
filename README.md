@@ -1,5 +1,5 @@
 # cakiyas-fps-scope
-Fps games scope ahk script (no screen recorder included)
+FPS games scope ahk script (no screen recorder included)
 
 This is an AutoHotkey script that allows you to specify a window to use as the "scope" (ideally a window of a preview of a recording of the game), and a hotkey ` to use as a toggle.
 
