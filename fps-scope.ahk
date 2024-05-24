@@ -8,22 +8,24 @@ class FpsScope{
     }
     static delete() {
         if (WinWait(windowName, , 1)) {
+            ; WinSetStyle "+0xC00000", "A"
             WinSetAlwaysOnTop 0, FpsScope.window
+            WinSetExStyle "-0x20", FpsScope.window
             WinSetTransparent "OFF", FpsScope.window
-            WinSetEnabled 1, FpsScope.window
         }
     }
     static show() {
-        WinSetEnabled 0, FpsScope.window
+        ; WinSetStyle "-0xC00000", "A" ; removes title bar
         WinSetAlwaysOnTop 1, FpsScope.window
-        WinSetTransparent "OFF", FpsScope.window
-    }  
+        WinSetExStyle "+0x20", FpsScope.window
+        WinSetTransparent 200, FpsScope.window
+    }               
     static hide() {
-        WinSetTransparent 0, FpsScope.window
+        WinSetTransparent 100, FpsScope.window
     }
 }
 
-ExitFunc(ExitReason, ExitCode){
+ExitFunc(ExitReason, ExitCode) {
     FpsScope.delete()
 }
 
@@ -37,8 +39,6 @@ if (promptObj.Result = "OK") {
 } else if (promptObj.Result = "Cancel") {
     ExitApp
 }
-
-
 
 ; ============ HOTKEYS ============
 `::{ ;                  to scope:   `
