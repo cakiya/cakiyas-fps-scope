@@ -59,38 +59,51 @@ ExitFunc(ExitReason, ExitCode) {
 }
 
 ; ============= MAIN ==============
-windows := FpsScope.getAllWindows()
-windowIDs := windows[1]
-windowNames := windows[2]
-ID := "" ; our window's ID
-name := "" ; our window's name
+main() {
+    windows := FpsScope.getAllWindows()
+    windowIDs := windows[1]
+    windowNames := windows[2]
+    ID := "" ; our window's ID
+    name := "" ; our window's name
 
-guiObject := gui()
-guiObject.AddText(, "Choose a program from the dropdown:")
-guiObject.AddText(, "(do not select an empty option)")
-ddOption := guiObject.AddDropDownList("vColorChoice", windowNames)
+    guiObject := gui()
+    guiObject.Opt("+Resize -MaximizeBox")
+    guiObject.AddText(, "Choose a program from the dropdown:")
+    guiObject.AddText(, "(do not select an empty option)")
+    ddOption := guiObject.AddDropDownList("vColorChoice", windowNames)
 
-btn := guiObject.AddButton("Default w80", "OK")
-btn.OnEvent("Click", go)
-go(btn, info) {
-    ID := windowIDs[ddOption.Value]
-    name := windowNames[ddOption.Value]
-    guiObject.Destroy()
-    FpsScope.new(ID, name)
+    btn := guiObject.AddButton("Default w80 xs", "OK")
+    btn.OnEvent("Click", ok)
+    ok(btn, info) {
+        ID := windowIDs[ddOption.Value]
+        name := windowNames[ddOption.Value]
+        guiObject.Destroy()
+        FpsScope.new(ID, name)
+    }
+
+    btn := guiObject.AddButton("Default w80 yp", "REFRESH")
+    btn.OnEvent("Click", refresh)
+    refresh(btn, info) {
+        guiObject.Destroy()
+        main()
+    }
+
+    ; EXIT button
+    btn := guiObject.AddButton("Default w80 yp", "EXIT")
+    btn.OnEvent("Click", exit)
+    exit(btn, info) {
+        ExitApp 1
+    }
+
+    ; when you click the x, closes properly
+    guiObject.OnEvent("Close", close)
+    close(guiObject) {
+        ExitApp 1
+    }
+
+    guiObject.Show()
 }
-
-btn := guiObject.AddButton("Default w80", "EXIT")
-btn.OnEvent("Click", exit)
-exit(btn, info) {
-    ExitApp 1
-}
-
-guiObject.Show()
-
-; promptObj := InputBox("Type in the name of a window.", "FPS scope")
-; windowName := promptObj.Value
-; FpsScope.new(windowName)
-; FpsScope.getAllWindows()
+main()
 
 
 
