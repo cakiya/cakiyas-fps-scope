@@ -2,6 +2,13 @@
 Persistent
 OnExit ExitFunc
 
+;==============Hotkeys===============
+;  scope        `
+;  center       Ctrl Shift Alt /
+;  quit         Ctrl Shift Alt X
+;  You can set them to something else at the bottom of the file.
+;====================================
+
 class FpsScope{
     static new(windowName) {
         this.window := windowName
