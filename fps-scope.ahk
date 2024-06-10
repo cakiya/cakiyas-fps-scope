@@ -10,11 +10,12 @@ OnExit ExitFunc
 ;====================================
 
 class FpsScope{
-    static new(windowName) {
+    static new(ID, windowName) {
+        this.ID := ID
         this.window := windowName
     }
-    static delete() {
-        if (WinWait(windowName, , 1)) {
+    static delete() { ; on exit script
+        if (WinExist(FpsScope.window)) {
             WinSetStyle "+0xC00000", FpsScope.window
             WinSetAlwaysOnTop 0, FpsScope.window
             WinSetExStyle "-0x20", FpsScope.window
@@ -29,14 +30,16 @@ class FpsScope{
     static hide() {
         WinSetTransparent 100, FpsScope.window
     }
-    static getAllWindows() {
+    static getAllWindows() { ; returns a 2d array of the ids and names [[id1, id2], [name1, name2]]
         IDs := WinGetList()
-        Names := [IDs.Length]
-        index := 0
-        for ID in IDs {
-            Names[index] := WinGetTitle(ID)
+        names := Array()
+        index := 1
+        Loop IDs.Length {
+            title := WinGetTitle(IDs[index])
+            names.Push(title)
             index := index + 1
         }
+        return [IDs, names]
     }
     static centerWindow() {
         WinSetStyle "^0xC00000", FpsScope.window
@@ -48,20 +51,45 @@ class FpsScope{
 }
 
 ExitFunc(ExitReason, ExitCode) {
-    FpsScope.delete()
+    if (ExitCode = 1) { ; dont do anything.
+
+    } else {
+        FpsScope.delete()
+    }
 }
 
 ; ============= MAIN ==============
-promptObj := InputBox("Type in the name of a window.", "FPS scope")
-windowName := promptObj.Value
-FpsScope.new(windowName)
+windows := FpsScope.getAllWindows()
+windowIDs := windows[1]
+windowNames := windows[2]
+ID := "" ; our window's ID
+name := "" ; our window's name
 
-if (promptObj.Result = "OK") {
-    ; to add: checks
-} else if (promptObj.Result = "Cancel") {
-    ExitApp
+guiObject := gui()
+guiObject.AddText(, "Choose a program from the dropdown:")
+guiObject.AddText(, "(do not select an empty option)")
+ddOption := guiObject.AddDropDownList("vColorChoice", windowNames)
+
+btn := guiObject.AddButton("Default w80", "OK")
+btn.OnEvent("Click", go)
+go(btn, info) {
+    ID := windowIDs[ddOption.Value]
+    name := windowNames[ddOption.Value]
+    guiObject.Destroy()
+    FpsScope.new(ID, name)
 }
 
+btn := guiObject.AddButton("Default w80", "EXIT")
+btn.OnEvent("Click", exit)
+exit(btn, info) {
+    ExitApp 1
+}
+
+guiObject.Show()
+
+; promptObj := InputBox("Type in the name of a window.", "FPS scope")
+; windowName := promptObj.Value
+; FpsScope.new(windowName)
 ; FpsScope.getAllWindows()
 
 
