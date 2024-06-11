@@ -9,6 +9,7 @@ Basically it's like a sniper scope in games, hold down the hotkey to overlay the
 3. press " ` " to see it in action
 
 Current Hotkeys:
+
 ![image](https://github.com/cakiya/cakiyas-fps-scope/assets/43363058/62756c98-95e8-4254-be7f-e3e621c2bd54)
 
 https://github.com/cakiya/cakiyas-fps-scope/assets/43363058/4b21a126-f364-4ffa-b9f6-43ca4c2c0df2
