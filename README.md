@@ -8,10 +8,13 @@ Basically it's like a sniper scope in games, hold down the hotkey to overlay the
 2. run script, select your window (if OBS, select Windowed Projector (Preview))
 3. press " ` " to see it in action
 
+https://github.com/cakiya/cakiyas-fps-scope/assets/43363058/4b21a126-f364-4ffa-b9f6-43ca4c2c0df2
+
 # To-Do
 1. add shortcuts guide, with checkbox
+2. make another demo video that's actually in an fps game like valorant.
 
-https://github.com/cakiya/cakiyas-fps-scope/assets/43363058/4b21a126-f364-4ffa-b9f6-43ca4c2c0df2
+
 
 
 
