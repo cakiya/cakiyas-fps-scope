@@ -1,5 +1,5 @@
 # cakiyas-fps-scope
-This is an AutoHotkey script that allows you to specify a window to use as the "scope" (ideally a window of a preview of a recording of the game), and a hotkey ` to use as a toggle.
+This is an AHK (AutoHotkey) script that allows you to specify a window to use as the "scope" (ideally a window of a preview of a recording of the game), and a hotkey ` to use as a toggle.
 
 Basically it's like a sniper scope in games, hold down the hotkey to overlay the preview, and release to hide the preview.
 
