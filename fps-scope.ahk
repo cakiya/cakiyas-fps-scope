@@ -6,14 +6,18 @@ OnExit ExitFunc
 ;  scope        `
 ;  center       Ctrl Shift Alt /
 ;  quit         Ctrl Shift Alt X
-;  You can set them to something else at the bottom of the file.
+;  
+;  You can set them to something 
+;  else at the bottom of the file 
+;  under "HOTKEYS".
 ;====================================
 
-class FpsScope{
+class FpsScope { ; if anyone has better suggestions on how to do this lmk (i couldn't figure out how to make a constructor for a non-static function... ahk is hard)
     static new(ID, windowName) {
         this.ID := ID
         this.window := windowName
     }
+
     static delete() { ; on exit script
         if (WinExist(FpsScope.window)) {
             WinSetStyle "+0xC00000", FpsScope.window
@@ -22,14 +26,17 @@ class FpsScope{
             WinSetTransparent "OFF", FpsScope.window
         }
     }
+
     static show() {
         WinSetAlwaysOnTop 1, FpsScope.window
         WinSetExStyle "+0x20", FpsScope.window ; makes it clickthrough
         WinSetTransparent 255, FpsScope.window
     }
+
     static hide() {
         WinSetTransparent 0, FpsScope.window
     }
+
     static getAllWindows() { ; returns a 2d array of the ids and names [[id1, id2], [name1, name2]]
         IDs := WinGetList()
         names := Array()
@@ -41,6 +48,7 @@ class FpsScope{
         }
         return [IDs, names]
     }
+
     static centerWindow() {
         WinSetStyle "^0xC00000", FpsScope.window
         WinGetPos &OutX, &OutY, &OutWidth, &OutHeight, FpsScope.window
@@ -50,11 +58,11 @@ class FpsScope{
     }
 }
 
-ExitFunc(ExitReason, ExitCode) {
+ExitFunc(ExitReason, ExitCode) { ; runs on ExitApp
     if (ExitCode = 1) { ; dont do anything.
 
     } else {
-        FpsScope.delete()
+        FpsScope.delete() ; reverts the window back to it's original state.
     }
 }
 
