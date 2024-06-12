@@ -25,10 +25,10 @@ class FpsScope{
     static show() {
         WinSetAlwaysOnTop 1, FpsScope.window
         WinSetExStyle "+0x20", FpsScope.window ; makes it clickthrough
-        WinSetTransparent 0, FpsScope.window
+        WinSetTransparent 255, FpsScope.window
     }
     static hide() {
-        WinSetTransparent 255, FpsScope.window
+        WinSetTransparent 0, FpsScope.window
     }
     static getAllWindows() { ; returns a 2d array of the ids and names [[id1, id2], [name1, name2]]
         IDs := WinGetList()
