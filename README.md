@@ -17,9 +17,6 @@ https://github.com/cakiya/cakiyas-fps-scope/assets/43363058/4b21a126-f364-4ffa-b
 
 # To-Do
 1. add shortcuts guide, with checkbox
-2. make another demo video that's actually in an fps game like valorant.
-
-
-
-
+2. make a demo vid that's more concise and actually shows the centering feature and quitting
+3. maybe also add a sens shift down when scoped? cause zoomed in is a bit hard to control (you can do thisi manually with mouse macros that press the scope hotkey and change dpi at the same time but that only works for gaming mice and it's not a feature of this application really)
 
